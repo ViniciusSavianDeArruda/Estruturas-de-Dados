@@ -34,5 +34,8 @@ void exibir(string vetorNomes[]){
             cout << vetorNomes[i] << '\n';
         }
     }
+
+
+    
     
 }
