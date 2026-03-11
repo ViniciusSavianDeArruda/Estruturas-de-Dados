@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# C/C++ (Executáveis e objetos)
+*.exe
+*.o
+*.out
+
+# Java (Arquivos compilados)
+*.class
+
+# Pastas de IDE
+.vscode/
