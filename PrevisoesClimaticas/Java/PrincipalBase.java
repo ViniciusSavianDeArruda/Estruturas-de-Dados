@@ -1,4 +1,4 @@
-package PrevisoesClimaticas;
+package Java;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
@@ -8,7 +8,7 @@ import java.util.List;
 public class PrincipalBase {
     public static void main(String[] args) {
         List<Clima> lista = new ArrayList<>();
-        String nomeBase = "PrevisoesClimaticas/base.csv";
+        String nomeBase = "PrevisoesClimaticas/baseClimatica.csv";
 
         // O try-with-resources já fecha o arquivo automaticamente (igual ao 'with' do Python)
         try (BufferedReader leitor = new BufferedReader(

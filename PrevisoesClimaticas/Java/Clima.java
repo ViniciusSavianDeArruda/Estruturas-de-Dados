@@ -1,4 +1,4 @@
-package PrevisoesClimaticas;
+package Java;
 public class Clima{
    public String ano;
    public String mes;

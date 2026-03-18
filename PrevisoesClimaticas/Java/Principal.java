@@ -1,5 +1,4 @@
-package PrevisoesClimaticas;
-
+package Java;
 import java.util.ArrayList;
 
 public class Principal {
@@ -29,3 +28,4 @@ public class Principal {
     
     }
 }
+
