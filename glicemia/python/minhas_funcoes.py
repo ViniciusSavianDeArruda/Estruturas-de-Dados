@@ -12,11 +12,11 @@ def popular_lista(lista, nome_base="../dados.csv"):
     arquivo.close()
 
 
+#DESAFIO = Calcular a media e a mediana dos valores da glecimina de acordo com a data de coleta, ou seja, calcular a media e a mediana dos valores da glicemia para cada data de coleta diferente.
 def calcular_media(lista):
     if not lista:
         return 0
     return sum(item.valor for item in lista) / len(lista)
-
 
 def calcular_mediana(lista):
     n = len(lista)

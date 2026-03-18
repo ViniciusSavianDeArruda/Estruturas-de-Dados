@@ -1,9 +1,11 @@
 from Glicemia import glicemia
 
+#criando uma lista para armazenar os objetos de glicemia
 listaGlicemia = []
 
+#criando o obejto 
 obj = glicemia(191,"11/03/2026", "9:00")
-listaGlicemia.append(obj)
+listaGlicemia.append(obj) #colocando o objeto na lista
 
 listaGlicemia.append(glicemia(200,"12/03/2026", "10:00"))
 
