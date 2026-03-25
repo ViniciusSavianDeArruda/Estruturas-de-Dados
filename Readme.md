@@ -1,4 +1,3 @@
-
 # Repositório destinado às aulas de Estrutura de Dados
 ## Professor Alexandre Zamberlan - alexz@ufn.edu.br - github.com/alexandrezamberlan
 
@@ -23,38 +22,31 @@ Esses conceitos são fundamentais para a construção de **programas eficientes 
 
 ## Estruturas de Dados Físicas
 
-São estruturas **dependentes da linguagem de programação**, representando diretamente como os dados são armazenados na memória.
-
-**Exemplos:**
+São dependentes da linguagem de programação, representando diretamente como os dados são armazenados na memória. Exemplos:
 
 - `int`
 - `float`
 - `char`
 - `string`
-- vetores
+- vetores (arrays)
 - matrizes
 
-Cada linguagem implementa esses tipos de forma diferente. Por exemplo, o tipo `int` em **Java** pode ter comportamento diferente do `int` em **C**.
-
----
+Cada linguagem implementa esses tipos de forma diferente. Por exemplo: `int` em Java pode ter tamanho ou comportamento diferente do `int` em C.
 
 ## Estruturas de Dados Abstratas (EDA)
 
-São estruturas **conceituais**, independentes da linguagem utilizada.
-
-Representam **modelos de organização de dados e algoritmos para manipulação da memória**.
-
-**Principais exemplos:**
+São estruturas conceituais, independentes da linguagem utilizada. Representam modelos de organização de dados e algoritmos para manipulação da memória. Exemplos:
 
 - Lista
-- Pilha
-- Fila
-- Árvore
-- Grafo
+- Pilha (Stack)
+- Fila (Queue)
+- Árvore (Tree)
+- Grafo (Graph)
 
-Cada linguagem possui suas próprias implementações dessas estruturas.
+Cada linguagem possui suas implementações dessas estruturas.
 
-**Exemplo:**  
+**Exemplo de Listas em diferentes linguagens:**
+
 | Linguagem | Implementação de Lista           |
 |-----------|----------------------------------|
 | C++       | vector                           |
@@ -66,25 +58,18 @@ Cada linguagem possui suas próprias implementações dessas estruturas.
 
 # Estruturas Lineares
 
-São estruturas onde os dados são organizados **em sequência**.
+São as estruturas onde os dados são organizados **em sequência**.
 
-## Vetores
+## Vetores (Arrays)
 
-Também chamados de **arrays**, armazenam elementos em posições consecutivas da memória.
+Vetores armazenam elementos em posições consecutivas da memória e cada elemento possui um índice (posição).
 
-Exemplo:
-
-```
+Exemplo:  
 [5, 9, 7, 2, 5]
-```
-
-Cada elemento possui um **índice** que indica sua posição.
-
----
 
 ## Listas
 
-Lista é uma estrutura que permite **armazenar vários elementos dinamicamente**.
+Permitem armazenar vários elementos dinamicamente.
 
 **Principais operações:**
 - inserir elementos
@@ -95,62 +80,32 @@ Lista é uma estrutura que permite **armazenar vários elementos dinamicamente**
 
 ### Exemplos de inserção
 
-**Python:**
-```python
-lista.append(valor)
-```
-
-**Java:**
-```java
-lista.add(valor);
-```
-
-**C++:**
-```cpp
-lista.push_back(valor);
-```
+**Python:**  `lista.append(valor)`  
+**Java:**  `lista.add(valor);`  
+**C++:**  `lista.push_back(valor);`
 
 ---
 
-## Outras Estruturas Lineares
+# Outras Estruturas Lineares
 
-### Pilha (Stack)
+## Pilha (Stack)
 
-Segue o princípio **LIFO (Last In, First Out)**.
+Princípio **LIFO (Last In, First Out)**: O último elemento inserido é o primeiro a sair.
 
-O último elemento inserido é o primeiro a sair.
-
-**Operações comuns:**
+Operações comuns:
 - `push` (inserir)
 - `pop` (remover)
-- topo
+- topo (ver elemento do topo)
 - verificar se está vazia
 
-**Exemplo conceitual:**
-```
-Topo
- ↓
-[10]
-[5]
-[2]
-```
+## Fila (Queue)
 
-### Fila (Queue)
+Princípio **FIFO (First In, First Out)**: O primeiro elemento inserido é o primeiro a sair.
 
-Segue o princípio **FIFO (First In, First Out)**.
-
-O primeiro elemento inserido é o primeiro a sair.
-
-**Operações principais:**
+Operações principais:
 - inserir
 - remover
-- acessar primeiro elemento
-- acessar último elemento
-
-**Exemplo:**
-```
-Entrada → [5][9][2] → Saída
-```
+- acessar primeiro/último elemento
 
 ---
 
@@ -158,22 +113,18 @@ Entrada → [5][9][2] → Saída
 
 ## Matrizes
 
-São estruturas com duas ou mais dimensões.
-
-**Exemplo:**
+Estruturas com duas ou mais dimensões.  
+Exemplo:
 ```
 [1 2 3]
 [4 5 6]
 [7 8 9]
 ```
 
----
-
 ## Árvores
 
-Estruturas hierárquicas formadas por nós conectados.
-
-**Exemplo:**
+Estruturas hierárquicas formadas por nós conectados.  
+Exemplo:
 ```
       A
      / \
@@ -181,23 +132,11 @@ Estruturas hierárquicas formadas por nós conectados.
    /
   D
 ```
-
-**Operações comuns:**
-- inserção
-- remoção
-- busca
-
----
+Operações comuns: inserção, remoção, busca.
 
 ## Grafos
 
-Estruturas formadas por **vértices** (nós) e **arestas** (ligações).
-
-**São utilizadas em:**
-- redes sociais
-- mapas
-- sistemas de rotas
-- redes de computadores
+Estruturas formadas por vértices (nós) e arestas (ligações). Usados em redes sociais, mapas, sistemas de rotas, redes de computadores.
 
 ---
 
@@ -229,12 +168,8 @@ Estruturas formadas por **vértices** (nós) e **arestas** (ligações).
 
 ## Verificar se está vazia
 
-Pode ser feito verificando:  
-`tamanho == 0`  
-
-Ou utilizando métodos específicos como:  
-`isEmpty()`  
-`empty()`
+- `tamanho == 0`  
+- Métodos: `isEmpty()`, `empty()`
 
 ## Busca de Elementos
 
@@ -262,6 +197,38 @@ if(vetor.contains(numero)){
     System.out.println("Encontrado");
 }
 ```
+---
+
+# Métodos equals e contains (e comparação de objetos)
+
+## equals
+
+O método `equals` (Java) serve para comparar se dois objetos são equivalentes do ponto de vista de suas informações, não apenas se estão no mesmo endereço da memória.
+
+**Exemplo Java:**
+```java
+public boolean equals(Object obj) {
+    if (this == obj) return true; // mesmo endereço de memória
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+
+    Clima outro = (Clima) obj;
+    return this.ano == outro.ano && this.mes.equals(outro.mes);
+}
+```
+
+No Python, usa-se o método `__eq__`:
+```python
+def __eq__(self, outro):
+    return self.ano == outro.ano and self.mes == outro.mes
+```
+
+## contains
+
+`contains` serve para consultar se um valor existe em uma lista/estrutura. Em Java, `contains` usa o método `equals` dos objetos para comparar.
+
+**Importante:**  
+Se o método `equals` NÃO estiver corretamente implementado na sua classe, o `contains` pode falhar (exemplo: dois objetos com os mesmos valores podem ser considerados diferentes se a comparação usar o endereço de memória — o padrão dos objetos do Java sem sobrescrita de `equals`).
 
 ---
 
@@ -314,37 +281,27 @@ Esse método cria uma nova lista sem valores duplicados.
 
 # Leitura de Arquivos e Objetos
 
-Também foi estudado como ler arquivos e transformar os dados em objetos.
-
-**Processo:**
+Processo:
 - Ler arquivo
-- Ler linha por linha
-- Separar os dados com split
+- Ler linha por linha (`for`/`while`)
+- Separar os dados com `split`
 - Criar um objeto
 - Inserir em uma lista
 
-**Exemplo de linha do arquivo:**
-```
-2020,Janeiro,Quente,muita
-```
-**Após o split:**
-```
-[2020, Janeiro, Quente, muita]
-```
+**Exemplo de linha do arquivo:**  
+`2020,Janeiro,Quente,muita`  
+Após split:  
+`[2020, Janeiro, Quente, muita]`
 
 ---
 
 ## Classe Clima
 
-A classe Clima representa informações climáticas.
+Representa informações climáticas.
 
-**Atributos:**
-- ano
-- mês
-- temperatura
-- precipitação
+**Atributos:** ano, mês, temperatura, precipitação
 
-### Python:
+**Exemplo Python:**
 ```python
 class Clima:
     def __init__(self, ano, mes, temperatura, precipitacao):
@@ -352,49 +309,90 @@ class Clima:
         self.mes = mes
         self.temperatura = temperatura
         self.precipitacao = precipitacao
+    def __eq__(self, outro):
+        return self.ano == outro.ano and self.mes == outro.mes
+    def __str__(self):
+        return f'{self.ano}, {self.mes}, {self.temperatura}, {self.precipitacao}'
 ```
-
-### Métodos Importantes
-
-- `__str__` / `toString()`: Usado para exibir o objeto de forma legível.
-- `__eq__` / `equals()`: Define quando dois objetos são considerados iguais.
-
-No exemplo da classe Clima:
-
-> Dois objetos são iguais se possuem o mesmo ano e mês.  
-> Isso evita inserir dados duplicados na lista.
 
 ---
 
 ## Leitura de Arquivos em Java
 
-Java pode ler arquivos utilizando `BufferedReader`.
+Java pode ler arquivos utilizando `BufferedReader`:
 
-Exemplo:
 ```java
 BufferedReader leitor = new BufferedReader(
     new FileReader(nomeBase)
 );
+String linha = leitor.readLine();
+String[] dados = linha.split(",");
 ```
-Depois as linhas são separadas com:
-```java
-linha.split(",");
-```
+
+---
+
+# Comparativo: Vector, List, ArrayList e LinkedList
+
+### **vector (C++):**
+- Estrutura dinâmica de array; redimensiona automaticamente.
+- Crescimento e acesso rápido (O(1) para acesso por índice).
+- Bem eficiente para acesso aleatório.
+- Inserções/remover no fim são rápidas; no meio/início são lentas.
+
+### **list (C++):**
+- Tipicamente, implementada como **lista duplamente ligada**.
+- Inserção e remoção rápidas em qualquer ponto (O(1)), mas **acesso aleatório é lento** (O(n)).
+- Usa muito ponteiro: consome mais memória para grandes listas.
+
+### **ArrayList (Java):**
+- Estrutura baseada em array dinâmico.
+- Acesso aleatório rápido (O(1)).
+- Inserção/remoção eficiente apenas no final.
+- Crescimento automático: normalmente dobra quando cheio.
+
+### **LinkedList (Java):**
+- Lista duplamente ligada.
+- Inserção/remoção rápidas em qualquer lugar.
+- Acesso sequencial, não eficiente para acesso aleatório (O(n)).
+- Permite inserir/remover no início/fim rapidamente.
+
+#### **Resumo (+ Quando usar uma ou outra):**
+
+| Estrutura     | Quando usar                                                           |
+|---------------|----------------------------------------------------------------------|
+| **vector**    | Precisa de acesso rápido por índice e poucas inserções no meio (C++)  |
+| **list**      | Precisa inserir/remover dados com frequência no início/meio (C++)     |
+| **ArrayList** | Precisa de acessos aleatórios rápidos e inserir/remover só no fim     |
+| **LinkedList**| Precisa inserir/remover com frequência em qualquer posição            |
+
+- Para buscas por índice rápidas e poucas inserções/remoções: **vector ou ArrayList**
+- Para inserção/remoção frequente fora do final: **list ou LinkedList**
+- Para manipulação sequencial: qualquer um pode servir, escolha pensando em performance.
+
+---
+
+# Resumo Visual: Diferenças
+
+| Estrutura      | Implementação         | Acesso Aleatório | Inserção/Remoção Início  | Inserção/Remoção Meio   | Inserção/Remoção Final | Memória    |
+| -------------- | -------------------- | ---------------:| -----------------------: | ----------------------:| ---------------------:| ----------:|
+| vector (C++)   | Array dinâmico        |      Rápido     |         Lento            |         Lento           |        Rápido         | Econômica  |
+| list (C++)     | Lista duplamente ligada|      Lento      |         Rápido           |        Rápido           |        Rápido         | Mais alta  |
+| ArrayList      | Array dinâmico        |      Rápido     |         Lento            |         Lento           |        Rápido         | Econômica  |
+| LinkedList     | Lista duplamente ligada|     Lento      |         Rápido           |        Rápido           |        Rápido         | Mais alta  |
 
 ---
 
 # Conclusão
 
-Até o momento na disciplina de Estruturas de Dados foram estudados os seguintes conceitos principais:
+Até o momento, foram estudados:
 
-- organização de dados na memória
-- estruturas físicas e abstratas
-- estruturas lineares e não lineares
-- listas, pilhas, filas, árvores e grafos
-- operações básicas (inserção, remoção e busca)
-- manipulação de listas em Python
-- geração de números aleatórios
-- remoção de elementos duplicados
-- leitura de arquivos
-- criação de classes e objetos
-- comparação de objetos para evitar duplicação
+- Organização de dados na memória
+- Estruturas físicas e abstratas
+- Estruturas lineares e não lineares: listas, pilhas, filas, árvores e grafos
+- Operações básicas: inserção, remoção e busca, métodos equals e contains, comparação de objetos
+- Exercícios de manipulação de listas em Python
+- Geração de números aleatórios e remoção de duplicados
+- Leitura de arquivos e transformação de linhas em objetos
+- Diferenças, vantagens e indicações de uso de vector, list, ArrayList e LinkedList
+
+**Siga estudando e documentando! 👨‍💻**
