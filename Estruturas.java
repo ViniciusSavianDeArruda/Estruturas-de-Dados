@@ -88,8 +88,5 @@ for (Processo p : lista) {
         Estruturas.exibirProcessos(lista);
         Estruturas.localizarProcessos(lista);
         Estruturas.removerProcessos(lista);
-
-        //pesquisar, entender e anotar no seu github a diferenca entre vector, list, arrayList e linkdeList quando usar uma ou outra
-
     }
 }

@@ -382,6 +382,120 @@ String[] dados = linha.split(",");
 
 ---
 
+# Exemplos Práticos: Listas de Objetos e Percursos em Java
+
+## Manipulando Listas de Objetos: Classe Processo
+
+É muito comum, em Java e em outras linguagens orientadas a objetos, construirmos listas de objetos personalizados. O exemplo a seguir ilustra várias operações sobre uma lista de objetos `Processo`, demonstrando também a importância dos métodos `equals` e `toString`, além do uso correto de iteradores para remoções.
+
+### Classe `Processo`
+
+A classe Processo representa um objeto com um campo de identificador (`id`) e uma descrição, além de métodos sobrepostos para suporte à lógica de comparação (`equals`) e visualização (`toString`). Assim, métodos como `contains` ou remoções por igualdade funcionam corretamente.
+
+```java
+public class Processo {
+    public int id;
+    public String descricao;
+
+    public Processo(int id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Processo outro = (Processo) obj;
+        return this.id == outro.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Processo{id=" + id + ", descricao='" + descricao + "'}";
+    }
+}
+```
+
+### Operações sobre Lista de Processos
+
+As operações essenciais em listas de objetos:
+- **Inserção** (`add`), evitando duplicidade (com `contains`, que usa `equals`)
+- **Exibição** em ordem alfabética pela descrição
+- **Busca** de processos por trecho do texto da descrição
+- **Remoção** de todos os processos cujo texto coincida/parcialmente com expressão buscada
+
+Abaixo, um resumo dos principais métodos:
+
+```java
+public static void gerarProcessos(ArrayList<Processo> lista) {
+    // Geração de processos com id aleatório e descrição do usuário,
+    // evitando duplicatas pelo método contains.
+}
+public static void exibirProcessos(ArrayList<Processo> lista) {
+    // Ordena a lista por descrição e exibe os processos.
+}
+public static void localizarProcessos(ArrayList<Processo> lista) {
+    // Busca e mostra processos cuja descrição contenha trecho informado.
+}
+public static void removerProcessos(ArrayList<Processo> lista) {
+    // Remove todos os processos via Iterator, conforme critério de busca na descrição.
+}
+```
+
+> **Dica:** ao remover elementos de uma lista enquanto a percorre, use sempre Iterator:
+```java
+Iterator<Processo> it = lista.iterator();
+while (it.hasNext()) {
+    Processo p = it.next();
+    if (p.descricao.contains(descricaoBuscada)) {
+        it.remove();
+    }
+}
+```
+Isso evita erros de modificação concorrente da lista em tempo real (ConcurrentModificationException).
+
+### Exemplos de Percurso em Listas
+
+Existem três formas principais de percorrer uma lista em Java:
+
+- **Via índice** (for clássico):  
+  Cuidado: não use para remover elementos, pois modifica o tamanho da lista e pode dar erro.
+
+- **Via For-each** (`for(... : ...)`):  
+  Para leitura apenas. Não usar para remoção!
+
+- **Via Iterator**:  
+  O único modo seguro de remover durante o percurso da lista.
+
+Exemplo de cada forma:
+```java
+ArrayList<Integer> lista = new ArrayList<>();
+lista.add(45);
+lista.add(2);
+lista.add(42);
+lista.add(23);
+
+// Percurso via índice
+for(int i = 0; i < lista.size(); i++){
+    System.out.println(lista.get(i));
+}
+
+// Percurso via objeto (for-each)
+for(Integer p : lista){
+    System.out.println(p);
+}
+
+// Percurso via Iterator
+Iterator<Integer> it = lista.iterator();
+while (it.hasNext()) {
+    int numero = it.next();
+    System.out.println(numero);
+}
+```
+
+---
+
 # Conclusão
 
 Até o momento, foram estudados:
@@ -394,5 +508,6 @@ Até o momento, foram estudados:
 - Geração de números aleatórios e remoção de duplicados
 - Leitura de arquivos e transformação de linhas em objetos
 - Diferenças, vantagens e indicações de uso de vector, list, ArrayList e LinkedList
+- **Manipulação prática de listas de objetos em Java, percursos e remoção usando Iterator**
 
 **Siga estudando e documentando! 👨‍💻**
