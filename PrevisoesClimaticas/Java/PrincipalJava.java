@@ -75,7 +75,7 @@ import java.util.List;
      */
     public static void mostrarDados(List<Clima> lista) {
 
-        System.out.println("\ndados:\n");
+        System.out.println("\n dados:\n");
 
         // percorre a lista usando for-each
         for (Clima item : lista) {
@@ -89,8 +89,8 @@ import java.util.List;
      */
     public static void calcularMesMaisChuvoso(List<Clima> lista) {
 
-        double maiorChuva = -1; 
-        String mesMaior = "";   
+        double maiorChuva = -1; //varivel para armazenar maior valor de chuva encontrado
+        String mesMaior = "";  
 
         // percorre cada elemento da lista
         for (Clima atual : lista) {
@@ -115,8 +115,7 @@ import java.util.List;
             }
         }
 
-        // mostra o resultado final
-        System.out.println("\nresultado:\n");
+        System.out.println("\n Resultado:\n");
         System.out.println("mes com mais chuva: " + mesMaior);
         System.out.println("total de chuva: " + maiorChuva);
     }
@@ -127,7 +126,7 @@ import java.util.List;
      */
     public static double getValorPrecipitacao(String p) {
 
-        // transforma em minúsculo para evitar erro de comparação
+        // transforma em minúsculo 
         p = p.toLowerCase();
 
         // define um valor para cada tipo de chuva
@@ -135,7 +134,6 @@ import java.util.List;
             case "muita":
                 return 3;
             case "média":
-            case "media":
                 return 2;
             case "pouca":
                 return 1;
