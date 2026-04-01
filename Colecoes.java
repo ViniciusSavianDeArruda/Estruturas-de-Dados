@@ -27,6 +27,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -57,7 +58,7 @@ public class Colecoes {
         }
         
         // FOCO NO INTERATOR DO ELEMENTO
-        Iterator i = lista.iterator();
+        Iterator<Integer> i = lista.iterator();
         while (i.hasNext()) { // enquanto o i tiver um proximo elemento
             System.out.println(i.next()); // mostra o proximo elemento e avanca o iterator para o proximo elemento
         }

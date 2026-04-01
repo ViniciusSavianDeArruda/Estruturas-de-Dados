@@ -47,19 +47,17 @@ public class Chamando {
                         qualFila = "NORMAL";
                     }
 
-                    // chama da fila prioritária se for a vez dela e houver pessoas
+                    // mantém tua lógica
                     if(qualFila.equals("PRIORITÁRIA") && !filaPrioritaria.isEmpty()){
                         fichaAtendida = filaPrioritaria.poll();
                     } 
-                    // senão, chama da fila normal se houver pessoas
-                    else if(!filaNormal.isEmpty(anObject:"normal") && !filaPrioritaria.isEmpty()){
+                    else if(!filaNormal.isEmpty()){ // corrigido aqui
                         fichaAtendida = filaNormal.poll();
-                        totalAtendidos++; // incrementa o total atendidos para manter a alternância correta
                     }
 
                     // exibe a ficha chamada
                     if(fichaAtendida != -1){
-                        totalAtendidos++;
+                        totalAtendidos++; // só incrementa uma vez
                         System.out.println("Chamando ficha... " + qualFila + ": " + fichaAtendida);
                     } else {
                         System.out.println("Nenhuma ficha para chamar.");
