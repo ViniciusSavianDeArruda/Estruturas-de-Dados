@@ -1,7 +1,7 @@
 package Java;
 import java.util.ArrayList;
 
-public class Principal {
+public class PrincipalTeste {
     public static void main(String[] args) {
         ArrayList<Clima> lista = new ArrayList<>();
         //Clima umClima = new Clima("2020", "janeiro,", "Quente", "pouca");
@@ -24,6 +24,9 @@ public class Principal {
         for(Clima c: lista){
             System.out.println(c);
         }
+
+        
+
 
     
     }
