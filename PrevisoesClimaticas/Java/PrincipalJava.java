@@ -1,92 +1,136 @@
 package Java;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrincipalJava {
+ public class PrincipalJava {
+
+    /**
+     * método principal que inicia o programa
+     */
     public static void main(String[] args) {
 
-        List<Clima> lista = new ArrayList<>();
-
+        // caminho do arquivo csv que será lido
         String nomeBase = "PrevisoesClimaticas/baseClimatica.csv";
+
+        // chama o método que lê o arquivo e retorna uma lista de objetos clima
+        List<Clima> lista = lerArquivo(nomeBase);
+
+        // mostra todos os dados carregados
+        mostrarDados(lista);
+
+        // calcula qual mês teve mais chuva
+        calcularMesMaisChuvoso(lista);
+    }
+
+    /**
+     * lê o arquivo csv e transforma cada linha em um objeto Clima
+     */
+    public static List<Clima> lerArquivo(String nomeBase) {
+
+        // lista onde serão armazenados os dados do arquivo
+        List<Clima> lista = new ArrayList<>();
 
         try (BufferedReader leitor = new BufferedReader(
                 new FileReader(nomeBase, StandardCharsets.UTF_8))) {
 
             String linha;
 
-            // Lê o arquivo linha por linha até o final
+            // lê o arquivo linha por linha até chegar no final
             while ((linha = leitor.readLine()) != null) {
 
-                // Divide a linha em partes (ano, mês, temperatura, precipitação)
+                // separa os dados usando a vírgula
                 String[] dadosLinha = linha.split(",");
 
-                // Cria um objeto Clima com os dados da linha
+                // evita erro caso a linha esteja incompleta
+                if (dadosLinha.length < 4) continue;
+
+                // cria um objeto clima com os dados da linha
                 Clima objClima = new Clima(
-                        dadosLinha[0],
-                        dadosLinha[1],
-                        dadosLinha[2],
-                        dadosLinha[3]
+                        dadosLinha[0], // ano
+                        dadosLinha[1], // mês
+                        dadosLinha[2], // temperatura
+                        dadosLinha[3]  // precipitação
                 );
 
-                // Evita adicionar dados repetidos na lista
+                // verifica se já existe na lista (evita duplicados)
                 if (!lista.contains(objClima)) {
                     lista.add(objClima);
                 }
             }
 
-            // Mostra todos os dados lidos
-            for (Clima item : lista) {
-                System.out.println(item);
-            }
-
-
-            // DESAFIO: descobrir o mês com mais chuvA
-            double maiorChuva = -1; // guarda o maior valor encontrado
-            String mesMaior = "";   // guarda o mês com maior chuva
-
-            // percorre cada registro
-            for (Clima atual : lista) {
-
-                double soma = 0; 
-
-                // percorre novamente a lista para somar o mesmo mês
-                for (Clima c : lista) {
-
-                    // verifica se é o mesmo mês
-                    if (c.mes.equalsIgnoreCase(atual.mes)) {
-
-                        // converte o texto (muita, média...) para número
-                        soma += getValorPrecipitacao(c.precipitacao);
-                    }
-                }
-
-                // verifica se esse mês é o que mais choveu até agora
-                if (soma > maiorChuva) {
-                    maiorChuva = soma;
-                    mesMaior = atual.mes;
-                }
-            }
-
-            // Mostra o resultado final
-            System.out.println("\nMês com mais chuva: " + mesMaior);
-            System.out.println("Total de chuva: " + maiorChuva);
-
         } catch (Exception e) {
-            // Caso dê erro ao ler o arquivo
-            System.err.println("Ocorreu algum erro... " + e.getMessage());
+            // caso dê erro ao abrir ou ler o arquivo
+            System.err.println("erro ao ler arquivo: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    /**
+     * percorre a lista e imprime todos os dados no console
+     */
+    public static void mostrarDados(List<Clima> lista) {
+
+        System.out.println("\ndados:\n");
+
+        // percorre a lista usando for-each
+        for (Clima item : lista) {
+            System.out.println(item);
         }
     }
 
-    // Método que transforma texto em número para poder somar
+    /**
+     * calcula qual mês teve a maior quantidade de chuva
+     * faz isso somando a chuva de todos os anos para cada mês
+     */
+    public static void calcularMesMaisChuvoso(List<Clima> lista) {
+
+        double maiorChuva = -1; 
+        String mesMaior = "";   
+
+        // percorre cada elemento da lista
+        for (Clima atual : lista) {
+
+            double soma = 0; 
+
+            // percorre novamente a lista para comparar os meses
+            for (Clima c : lista) {
+
+                // verifica se é o mesmo mês (ignora maiúsculo/minúsculo)
+                if (c.mes.equalsIgnoreCase(atual.mes)) {
+
+                    // soma o valor da precipitação convertido para número
+                    soma += getValorPrecipitacao(c.precipitacao);
+                }
+            }
+
+            // verifica se essa soma é maior que a anterior
+            if (soma > maiorChuva) {
+                maiorChuva = soma;
+                mesMaior = atual.mes;
+            }
+        }
+
+        // mostra o resultado final
+        System.out.println("\nresultado:\n");
+        System.out.println("mes com mais chuva: " + mesMaior);
+        System.out.println("total de chuva: " + maiorChuva);
+    }
+
+    /**
+     * converte o texto da precipitação em número
+     * isso permite fazer cálculos (somar chuva)
+     */
     public static double getValorPrecipitacao(String p) {
 
-        // transforma tudo em minúsculo para evitar erro
+        // transforma em minúsculo para evitar erro de comparação
         p = p.toLowerCase();
 
-        // define valores para cada tipo de chuva
+        // define um valor para cada tipo de chuva
         switch (p) {
             case "muita":
                 return 3;
@@ -98,7 +142,7 @@ public class PrincipalJava {
             case "nada":
                 return 0;
             default:
-                return 0; 
+                return 0;
         }
     }
 }

@@ -4,6 +4,7 @@ public class Clima{
    public String mes;
    public String temperatura;
    public String precipitacao;
+   
 //constructor da classe clima, recebe o ano, mes, temperatura e precipitacao
     public Clima(String ano, String mes, String temperatura, String precipitacao) {
         this.ano = ano;
