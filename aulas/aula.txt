@@ -1,0 +1,283 @@
+/*
+ * Estruturas de Dados - Aula Completa
+ * Autor: Laboratório
+ * Linguagem principal: Java
+ * OBS: Arquivo didático com toda a teoria, exemplos e exercícios
+ */
+
+// 1) O que é Estrutura de Dados?
+
+/*
+ * - Disciplina ou área da Ciência da Computação que estuda algoritmos para melhor gestão de memória
+ * 
+ * Estruturas de Dados Físicas:
+ * - Variáveis: dependentes das linguagens de programação
+ *   - int do Java é diferente do int do C
+ * 
+ * Estruturas de Dados Abstratas:
+ * - Algoritmos de gestão de memória
+ * - Estruturas lineares: vetores (matriz de 1 dimensão)
+ *   - Pilhas (Stack): inserção, remoção, estaVazia, tamanho, localizar, topo...
+ *   - Fila (Queue): inserção, remoção, estaVazia, localizar, primeiro, último...
+ *   - Lista (List): inserção, remoção, estaVazia, localizar
+ * - Estruturas não lineares: matrizes de N dimensões
+ *   - Árvores (Tree): inserção, remoção, estaVazia, localizar
+ *   - Grafos: remoção, caminho, melhorCaminho
+ */
+
+// 2) Exemplo de Lista em Python
+
+/*
+lista_nomes = []
+
+# Adicionar nomes na lista
+lista_nomes.append("Guilherme")
+lista_nomes.append("Bruno")
+lista_nomes.append("Leonardo")
+
+# Exibir a lista inteira
+print(lista_nomes)
+
+# Remover um nome da lista
+if len(lista_nomes) != 0:
+    nome = input("Digite um nome: ")
+    if lista_nomes.__contains__(nome):
+        lista_nomes.remove(nome)
+    else:
+        print(nome, "não está na lista")
+
+    print(lista_nomes)
+else:
+    print("Lista vazia...")
+*/
+
+// 3) Exemplo de Lista em Java
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class ExemploListaJava {
+
+    public static void main(String[] args) {
+        ArrayList<String> listaNomes = new ArrayList<>();
+        Scanner teclado = new Scanner(System.in);
+        String nome;
+
+        listaNomes.add("Guilherme");
+        listaNomes.add("Pedro");
+        listaNomes.add("Maria");
+
+        System.out.println("Lista inicial: " + listaNomes);
+
+        if (listaNomes.size() != 0) {
+            System.out.print("Digite um nome para remover: ");
+            nome = teclado.nextLine();
+            if (listaNomes.contains(nome)) {
+                listaNomes.remove(nome);
+                System.out.println(nome + " removido.");
+            } else {
+                System.out.println("Nome não localizado.");
+            }
+
+            System.out.println("Lista final (" + listaNomes.size() + " elementos): " + listaNomes);
+        }
+
+        teclado.close();
+    }
+}
+
+// 4) Exemplo de Lista em C++
+
+/*
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#define TAMANHO 10
+
+using namespace std;
+
+#include "utilidades.h"
+
+int main() {
+    string vetorNomes[TAMANHO];
+    inicializar(vetorNomes);
+    int totalNomesInseridos = 0;
+
+    totalNomesInseridos = inserir("Davi", vetorNomes, totalNomesInseridos);
+    totalNomesInseridos = inserir("Eduardo", vetorNomes, totalNomesInseridos);
+    totalNomesInseridos = inserir("Gabriel", vetorNomes, totalNomesInseridos);
+
+    if (totalNomesInseridos > 0) {
+        exibir(vetorNomes);
+    } else {
+        cout << "Vetor de nomes vazio\n";
+    }
+
+    string nome;
+    cout << "Digite um nome: ";
+    getline(cin, nome);
+
+    // DESAFIO: remover nome da lista
+    totalNomesInseridos = remover(nome, vetorNomes, totalNomesInseridos);
+    exibir(vetorNomes);
+
+    return 1;
+}
+*/
+
+// 5) Biblioteca utilidades.h (C++)
+
+/*
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#define TAMANHO 10
+
+using namespace std;
+
+void inicializar(string vetor[]) {
+    for (int i = 0; i < TAMANHO; i++) {
+        vetor[i] = "branco";
+    }
+}
+
+int inserir(string nome, string vetor[], int total) {
+    if (total == TAMANHO) {
+        cout << "Vetor lotado\n";
+    } else {
+        for (int i = 0; i < TAMANHO; i++) {
+            if (vetor[i] == "branco") {
+                vetor[i] = nome;
+                total++;
+                break;
+            }
+        }
+    }
+    return total;
+}
+
+void exibir(string vetor[]) {
+    for (int i = 0; i < TAMANHO; i++) {
+        if (vetor[i] != "branco") {
+            cout << vetor[i] << "\n";
+        }
+    }
+}
+
+// DESAFIO: remover nome
+int remover(string nome, string vetor[], int total) {
+    for (int i = 0; i < TAMANHO; i++) {
+        if (vetor[i] == nome) {
+            vetor[i] = "branco";
+            total--;
+        }
+    }
+    return total;
+}
+*/
+
+// 6) Revisão de Estruturas de Dados
+
+/*
+- Estruturas físicas: variáveis
+- Estruturas abstratas: listas, pilhas, filas, árvores, grafos
+- Operações clássicas: inserir, remover, buscar, atualizar
+- Em Python, Java, C++, C#: existem métodos específicos para cada operação
+*/
+
+// 7) Exemplo com objetos: Clima (Python e Java)
+
+/*
+// Python
+
+class Clima:
+    def __init__(self, ano, mes, temperatura, precipitacao):
+        self.ano = ano
+        self.mes = mes
+        self.temperatura = temperatura
+        self.precipitacao = precipitacao
+
+    def __str__(self):
+        return f"Dados climaticos - Ano: {self.ano}, Mês: {self.mes}, Temperatura: {self.temperatura}, Precipitação: {self.precipitacao}"
+
+    def __eq__(self, object):
+        if not isinstance(object, self.__class__):
+            return NotImplemented
+        return self.ano == object.ano and self.mes == object.mes
+*/
+
+// Java
+
+class Clima {
+    public String ano;
+    public String mes;
+    public String temperatura;
+    public String precipitacao;
+
+    public Clima(String ano, String mes, String temperatura, String precipitacao) {
+        this.ano = ano;
+        this.mes = mes;
+        this.temperatura = temperatura;
+        this.precipitacao = precipitacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Dados climaticos(Ano: " + this.ano + ", Mês: " + this.mes + ", Temperatura: " + this.temperatura
+                + ", Precipitação: " + this.precipitacao + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Clima)) return false;
+        Clima c = (Clima) obj;
+        return this.ano.equals(c.ano) && this.mes.equals(c.mes);
+    }
+}
+
+// 8) Principal de manipulação de lista de Clima (Java)
+
+class PrincipalClimaJava {
+
+    public static void main(String[] args) {
+        List<Clima> lista = new ArrayList<>();
+
+        String[] linhas = {
+                "2020,Janeiro,Quente,Muita",
+                "2020,Fevereiro,Frio,Pouca",
+                "2020,Janeiro,Quente,Muita" // duplicado
+        };
+
+        for (String linha : linhas) {
+            String[] dados = linha.split(",");
+            Clima objClima = new Clima(dados[0], dados[1], dados[2], dados[3]);
+            if (!lista.contains(objClima)) {
+                lista.add(objClima);
+            }
+        }
+
+        for (Clima c : lista) {
+            System.out.println(c);
+        }
+    }
+}
+
+// 9) Coleções, Pilhas e Filas em Java
+
+/*
+- List -> ArrayList, LinkedList
+- Stack -> LIFO (Last In, First Out)
+    - push(), pop(), peek(), isEmpty(), size(), contains()
+- Queue -> FIFO (First In, First Out)
+    - add(), remove(), peek(), isEmpty(), size(), contains()
+*/
+
+// 10) Observações gerais
+
+/*
+- Sempre sobrescrever toString() e equals() para objetos que irão para coleções
+- Em listas, pilhas e filas, operações básicas de CRUD são essenciais
+- Em estruturas físicas, cada linguagem possui tipos próprios (int, float, char, string)
+- Em listas abstratas, é preciso gerenciar memória e operações de forma eficiente
+*/
