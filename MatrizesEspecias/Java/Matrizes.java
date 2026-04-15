@@ -1,4 +1,4 @@
-package MatrizesEspecias;
+package MatrizesEspecias.Java;
 
 import java.util.List;
 

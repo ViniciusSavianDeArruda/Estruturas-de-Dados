@@ -1,4 +1,4 @@
-package MatrizesEspecias;
+package MatrizesEspecias.Java;
 
 public class Dado {
     int valor;
