@@ -70,7 +70,6 @@ public class GestaoAlunos {
      */
     public void ordenarPorAno() {
 
-        // Ordena comparando valores numéricos do ano
         Collections.sort(alunos, new Comparator<Aluno>() {
             @Override
             public int compare(Aluno a1, Aluno a2) {
@@ -127,5 +126,6 @@ public class GestaoAlunos {
         for (Integer ano : anos) {
             System.out.println(ano + " -> " + contagem.get(ano));
         }
+        
     }
 }

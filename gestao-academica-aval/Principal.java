@@ -11,6 +11,7 @@ public class Principal {
 
         int op;
 
+        //Utilizei do-while e switch-case para organizar melhor a aplicação e aprimorar a usabilidade, permitindo que o usuário escolha as opções no menu
         do {
             System.out.println("\n MENU ");
             System.out.println("1 - Listar alunos");
