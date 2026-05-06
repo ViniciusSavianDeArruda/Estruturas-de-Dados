@@ -2,7 +2,7 @@
 
 > **Disciplina:** Estruturas de Dados  
 > **Professor:** Alexandre Zamberlan — alexz@ufn.edu.br — [github.com/alexandrezamberlan](https://github.com/alexandrezamberlan)  
-> **Linguagem principal:** Java  
+> **Linguagem principal:** Java e python
 > **Objetivo:** Organizar, armazenar e manipular dados na memória de forma eficiente.
 
 ---
@@ -18,6 +18,7 @@
 - [🧬 Hierarquia das Coleções Java e Polimorfismo](#-hierarquia-das-coleções-java-e-polimorfismo)
 - [⚖️ Comparativo: `ArrayList` vs `LinkedList`](#️-comparativo-arraylist-vs-linkedlist)
 - [4. 🔢 Matrizes Especiais](#4--matrizes-especiais)
+- [5. 🔄 Recursão](#5--recursão)
 - [🌐 Estruturas Não Lineares (Visão Geral)](#-estruturas-não-lineares-visão-geral)
 - [🚀 Evolução Prática](#-evolução-prática)
 - [📎 Estrutura de Arquivos do Repositório](#-estrutura-de-arquivos-do-repositório)
@@ -1421,15 +1422,6 @@ print(f"Economia de memória: {(1 - len(lista) / 16) * 100:.0f}%")
 for p in lista:
     print(p)
 
-# Saída:
-# Matriz 4×4 → 16 células alocadas
-# Lista encadeada → apenas 4 nós
-# Economia de memória: 75%
-# Pixel{l=0, c=2, v=128}
-# Pixel{l=1, c=3, v=255}
-# Pixel{l=2, c=1, v=64}
-# Pixel{l=3, c=3, v=200}
-
 # ── Exemplo: identificar tipos por célula ──────────────────────────
 n = 4
 for i in range(n):
@@ -1462,6 +1454,293 @@ for i in range(n):
 - Sempre guarde `linha` e `coluna` no nó, pois a posição original é informação essencial
 - Para imagens reais, considere formatos comprimidos (PNG, JPEG) que já aplicam esse princípio internamente
 - Em Python, `scipy.sparse` e `numpy` oferecem estruturas prontas para matrizes esparsas de alta performance
+
+---
+
+# 5. 🔄 Recursão
+
+## Conceito Teórico
+
+**Recursão** é um recurso de programação que executa repetições **sem usar `for`, `while` ou `do-while`**. Em vez de um laço, o método **chama a si mesmo** — esse autochamamento é o **ponto de recursão**.
+
+Tecnicamente, a recursão é uma técnica baseada no **comportamento natural de empilhar e desempilhar da call stack do SO**: cada chamada ao método empilha um novo frame de execução; quando o teste de parada é atingido, os frames são desempilhados em ordem reversa.
+
+> ⚠️ **Recursão é um recurso CARO:** cada chamada ocupa espaço na pilha de execução (call stack). Muitas chamadas aninhadas podem causar **`StackOverflowError`** (Java) ou **`RecursionError`** (Python).
+
+---
+
+## Os Dois Tipos de Recursão
+
+### Sem retorno — `void`
+
+O método empilha chamadas e executa ações durante o **empilhamento ou desempilhamento**, sem retornar valores. É a forma mais simples.
+
+```text
+mostrarDecrescente(3)
+  mostrarDecrescente(2)
+    mostrarDecrescente(1)
+      mostrarDecrescente(0)
+        mostrarDecrescente(-1) → PARA (teste falhou)
+      imprime 0
+    imprime 1
+  imprime 2
+imprime 3
+```
+
+### Com retorno — `return`
+
+O método **acumula um resultado** durante o desempilhamento — cada frame da pilha devolve um valor para o frame anterior. É mais complexo pois exige raciocinar sobre o que retorna em cada nível.
+
+```text
+fatorial(4)
+  = 4 * fatorial(3)
+         = 3 * fatorial(2)
+                = 2 * fatorial(1)
+                       = 1 * fatorial(0)
+                              = 1  ← caso base
+                       = 1 * 1 = 1
+                = 2 * 1 = 2
+         = 3 * 2 = 6
+  = 4 * 6 = 24
+```
+
+---
+
+## Estrutura de um Método Recursivo
+
+Todo método recursivo possui as mesmas três partes que um laço de repetição:
+
+| Parte | Laço | Recursão |
+|-------|------|----------|
+| **A** — Inicialização | `int i = 0` antes do `for` | parâmetro inicial na primeira chamada |
+| **B** — Teste de parada | condição do `for`/`while` | `if` que impede a recursão de continuar |
+| **C** — Transformação | `i++` ou `i--` | argumento modificado no ponto de recursão |
+
+```java
+// Laço
+for (int i = 0; i <= n; i++) { ... }   // A=0, B=i<=n, C=i++
+
+// Recursão equivalente
+void metodo(int i, int n) {
+    if (i <= n) {              // B — teste de parada
+        ...
+        metodo(i + 1, n);      // C — transformação (ponto de recursão)
+    }
+}
+// Chamada inicial: metodo(0, n);  // A — inicialização
+```
+
+> 💡 **Regra de ouro:** se você consegue escrever o laço, consegue escrever a recursão — basta mapear A, B e C.
+
+---
+
+## 📝 Exemplos de Código em Java
+
+```java
+package recursao.java;
+import java.util.ArrayList;
+
+public class Recursao {
+
+    // ── Sequência decrescente ITERATIVA ──────────────────────────────
+    static void mostrarSequenciaDecrescente(int numero) {
+        for (; numero >= 0; numero--) {
+            System.out.println(numero);
+        }
+    }
+
+    // ── Sequência decrescente RECURSIVA ──────────────────────────────
+    // A = número inicial passado na chamada
+    // B = numero >= 0
+    // C = numero - 1
+    static void mostrarSequenciaDecrescenteR(int numero) {
+        if (numero >= 0) {                           // B — teste de parada
+            System.out.println(numero);
+            mostrarSequenciaDecrescenteR(numero - 1); // C — ponto de recursão
+        }
+    }
+
+    // ── Sequência CRESCENTE recursiva ────────────────────────────────
+    // Truque: imprime DEPOIS do ponto de recursão → ordem invertida
+    static void mostrarSequenciaCrescenteR(int numero) {
+        if (numero >= 0) {
+            mostrarSequenciaCrescenteR(numero - 1);  // desce primeiro
+            System.out.println(numero);              // imprime ao subir
+        }
+    }
+
+    // ── Intervalo [ini, fim] recursivo ───────────────────────────────
+    static void mostrarIntervaloR(int ini, int fim) {
+        if (ini <= fim) {                  // B
+            System.out.println(ini);
+            mostrarIntervaloR(ini + 1, fim); // C
+        }
+    }
+
+    // ── Percorrer ArrayList recursivamente ───────────────────────────
+    // numero começa em lista.size() e vai até 1
+    static void mostrarListaR(ArrayList<Integer> lista, int numero) {
+        if (numero > 0) {
+            System.out.println(lista.get(numero - 1)); // acessa do fim para o início
+            mostrarListaR(lista, numero - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> lista = new ArrayList<>();
+        lista.add(20);
+        lista.add(30);
+        lista.add(40);
+
+        System.out.println("=== Lista (decrescente por índice) ===");
+        mostrarListaR(lista, lista.size()); // imprime 40, 30, 20
+
+        System.out.println("=== Sequência decrescente ===");
+        mostrarSequenciaDecrescenteR(3);    // 3, 2, 1, 0
+
+        System.out.println("=== Sequência crescente ===");
+        mostrarSequenciaCrescenteR(3);      // 0, 1, 2, 3
+
+        System.out.println("=== Intervalo [3, 6] ===");
+        mostrarIntervaloR(3, 6);            // 3, 4, 5, 6
+    }
+}
+```
+
+---
+
+## 📐 Recursão com Retorno — Exemplos Clássicos
+
+### Fatorial
+
+```java
+// n! = n * (n-1) * ... * 1      |    0! = 1 (caso base)
+static long fatorial(int n) {
+    if (n == 0) return 1;          // caso base — SEMPRE necessário!
+    return n * fatorial(n - 1);    // ponto de recursão com retorno
+}
+
+System.out.println(fatorial(5)); // 120
+```
+
+### Fibonacci
+
+```java
+// fib(n) = fib(n-1) + fib(n-2)  |  fib(0)=0, fib(1)=1
+static int fibonacci(int n) {
+    if (n <= 1) return n;                          // casos base
+    return fibonacci(n - 1) + fibonacci(n - 2);   // dois pontos de recursão!
+}
+
+System.out.println(fibonacci(7)); // 13
+```
+
+> ⚠️ Fibonacci recursivo tem complexidade **O(2ⁿ)** — muito ineficiente para valores grandes. Use **memoização** ou versão iterativa para n > 30.
+
+### Soma de lista recursiva
+
+```java
+static int somaLista(ArrayList<Integer> lista, int n) {
+    if (n == 0) return 0;                          // caso base
+    return lista.get(n - 1) + somaLista(lista, n - 1); // acumula subindo
+}
+
+// Uso: somaLista(lista, lista.size())
+```
+
+---
+
+## 🐍 Equivalente em Python
+
+```python
+import sys
+
+# Python tem limite padrão de 1000 chamadas recursivas
+# Para aumentar: sys.setrecursionlimit(5000)
+
+# ── Sequência decrescente recursiva ──────────────────────────────
+def mostrar_decrescente_r(numero):
+    if numero >= 0:               # B — teste de parada
+        print(numero)
+        mostrar_decrescente_r(numero - 1)  # C — ponto de recursão
+
+# ── Sequência crescente recursiva (imprime ao "subir") ───────────
+def mostrar_crescente_r(numero):
+    if numero >= 0:
+        mostrar_crescente_r(numero - 1)   # desce primeiro
+        print(numero)                     # imprime ao desempilhar
+
+# ── Intervalo recursivo ───────────────────────────────────────────
+def mostrar_intervalo_r(ini, fim):
+    if ini <= fim:
+        print(ini)
+        mostrar_intervalo_r(ini + 1, fim)
+
+# ── Percorrer lista recursivamente ───────────────────────────────
+def mostrar_lista_r(lista, numero):
+    if numero > 0:
+        print(lista[numero - 1])
+        mostrar_lista_r(lista, numero - 1)
+
+# ── Fatorial recursivo ────────────────────────────────────────────
+def fatorial(n):
+    if n == 0:
+        return 1               # caso base
+    return n * fatorial(n - 1)
+
+# ── Fibonacci recursivo ───────────────────────────────────────────
+def fibonacci(n):
+    if n <= 1:
+        return n               # casos base: fib(0)=0, fib(1)=1
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# ── Soma de lista recursiva ───────────────────────────────────────
+def soma_lista(lista, n):
+    if n == 0:
+        return 0
+    return lista[n - 1] + soma_lista(lista, n - 1)
+
+
+# Uso
+lista = [20, 30, 40]
+mostrar_lista_r(lista, len(lista))   # 40, 30, 20
+mostrar_decrescente_r(3)             # 3, 2, 1, 0
+mostrar_crescente_r(3)               # 0, 1, 2, 3
+mostrar_intervalo_r(3, 6)            # 3, 4, 5, 6
+print(fatorial(5))                   # 120
+print(fibonacci(7))                  # 13
+print(soma_lista(lista, len(lista))) # 90
+```
+
+| Operação | Java | Python |
+|----------|------|--------|
+| Limite de recursão | `StackOverflowError` (padrão ~500–1000 frames) | `RecursionError` (padrão 1000) |
+| Alterar limite | não trivial | `sys.setrecursionlimit(n)` |
+| Otimização de cauda | não suportado | não suportado nativamente |
+
+---
+
+## 🧠 Recursão vs. Iteração — Quando usar cada uma?
+
+| Critério | Recursão | Iteração |
+|----------|----------|----------|
+| **Clareza** | Mais clara para problemas naturalmente recursivos (árvores, grafos) | Mais clara para sequências simples |
+| **Custo de memória** | Alto — cada chamada ocupa a call stack | Baixo — usa apenas variáveis locais |
+| **Risco de estouro** | `StackOverflow` para entradas muito grandes | Sem risco equivalente |
+| **Performance** | Geralmente mais lenta (overhead de chamadas) | Geralmente mais rápida |
+| **Quando preferir** | Árvores, grafos, divisão-e-conquista, backtracking | Sequências, acumuladores simples |
+
+> 💡 **Regra prática:** se o problema tem uma **estrutura naturalmente hierárquica ou recursiva** (como percorrer uma árvore), use recursão. Para sequências simples com muitas iterações, prefira o laço.
+
+---
+
+## ✅ Boas Práticas com Recursão
+
+- **Sempre defina o caso base** — sem ele, a recursão é infinita e causa `StackOverflow`
+- Verifique se a variável de controle **converge para o caso base** — a cada chamada, deve ficar mais próxima da condição de parada
+- Evite recursão onde a entrada pode ser muito grande (ex.: `fibonacci(50)`) — prefira iteração ou memoização
+- Para recursão com retorno, **trace manualmente** os primeiros níveis antes de codificar — ajuda a entender o que retorna em cada frame
+- Em Python, o limite padrão é 1000 chamadas — use `sys.setrecursionlimit()` com cautela
 
 ---
 
@@ -1517,6 +1796,7 @@ Aqui está um registro da evolução do aprendizado ao longo das aulas — do co
 | 🚶 **Queue (Fila)** | Conceito FIFO, `offer`, `poll`, `peek`; diferença entre métodos que lançam exceção e os que retornam null |
 | 🏥 **Fila com prioridade** | Implementação de sistema de atendimento com duas filas e lógica de alternância por módulo (`%`) |
 | 📚 **Stack (Pilha)** | Conceito LIFO, `push`, `pop`, `peek`; entendimento de que a remoção sempre ocorre no topo |
+| 🔄 **Recursão** | Autochamamento de métodos; tipos void e com retorno; mapeamento A/B/C; casos base; fatorial, Fibonacci e percurso de listas |
 
 ---
 
@@ -1528,7 +1808,8 @@ Aqui está um registro da evolução do aprendizado ao longo das aulas — do co
 ├── 📄 Estruturas.java        # Operações com ArrayList de objetos
 ├── 📄 ListaPercorrer.java    # Três formas de percurso em listas
 ├── 📄 Colecoes.java          # Exemplos de ArrayList, Stack e Queue
-└── 📄 Chamando.java          # Sistema de filas com prioridade
+├── 📄 Chamando.java          # Sistema de filas com prioridade
+└── 📄 Recursao.java          # Exemplos de recursão void e com retorno
 ```
 
 ---
