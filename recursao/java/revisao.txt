@@ -1,0 +1,5 @@
+Recursao é um recurso de programacao que substitui as instrucoes de repeticao(for-while)
+toda a repeticicao obedece 3 pontos:
+1) inicializacao da variavel de controle
+2) teste de parada
+3) transformacao da variavel de controle
