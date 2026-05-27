@@ -1,0 +1,42 @@
+Arvore
+    - ED Abstrata: com crud completo
+        - foco na busca
+        - tipos:
+            - generico: um nodo pai e n nodos filhos
+            - binario: um nodo pai e no maximo 2 nodos filhos
+                - arvore binaria de pesquisa ou de busca - ORDENADAS
+        - conceitos
+            - raiz - no ou nodo de pricipal de uma arvore ou de subarvores
+            - folhas - no ou nodo sem filhos(REGIAO DE INSERCAO)
+            - nivel - a posicao hierarquica de um no ou nodo. Comeca em 0
+            - percursso ou caminho
+                Metodos de percurso:
+                - RED - pre-fixado ou pre-ordem, 
+                    R - visita raiz ou aplica uma instrucao ou comando
+                    E - empilha o nodo do filho da esquerda
+                    D - empilha o nodo do filho da direita
+                         R -> E -> D
+                         
+                - ERD - in-fixado ou em ordem
+                    E - percorre o nodo da esquerda
+                    R - visita raiz ou aplica uma instrucao
+                    D - percorre o nodo da direita
+                         E -> R -> D
+
+                - EDR - pos-fixado ou pos-ordem
+                    E - percorre o nodo da esquerda
+                    D - percorre o nodo da direita
+                    R - visita raiz ou aplica uma instrucao
+                        E -> D -> R
+
+    Onde aplicar arvore:
+        - organizacao hierarquica de dados
+        - buscas rapidas e eficientes
+        - armazenamento ordenado de informacoes
+        - estruturas de sistemas operacionais
+        - banco de dados e indexacao
+        - compiladores e interpretadores
+        - inteligencia artificial e jogos
+        - representacao de diretorios e arquivos
+        - manipulacao de expressoes matematicas
+        - navegacao em paginas e menus

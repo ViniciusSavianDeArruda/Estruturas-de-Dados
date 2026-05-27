@@ -1,4 +1,4 @@
-package arvore;
+package arvore.java;
 
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -11,7 +11,7 @@ public class Arvore {
         TreeSet<Integer> arvore = new TreeSet<>();
         ArrayList<Integer> lista = new ArrayList<>();
 
-        // ===================== TREESET =====================
+        // TREESET
         long inicio = System.currentTimeMillis();
 
         for (int i = 0; i < quantidade; i++) {
@@ -22,7 +22,7 @@ public class Arvore {
         long fim = System.currentTimeMillis();
         System.out.println("Tempo TreeSet: " + (fim - inicio) + " ms");
 
-        // ===================== ARRAYLIST =====================
+        // ARRAYLIST
         inicio = System.currentTimeMillis();
 
         for (int i = 0; i < quantidade; i++) {
@@ -33,7 +33,7 @@ public class Arvore {
         fim = System.currentTimeMillis();
         System.out.println("Tempo ArrayList: " + (fim - inicio) + " ms");
 
-        // ===================== TESTE EXTRA =====================
+        // TESTE EXTRA
         System.out.println("\nTamanho TreeSet: " + arvore.size());
         System.out.println("Tamanho ArrayList: " + lista.size());
     }
